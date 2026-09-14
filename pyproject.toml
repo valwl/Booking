@@ -1,0 +1,20 @@
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "booking_project.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = "-v --strict-markers"
+asyncio_mode = "strict"
+
+
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "C4"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["booking", "users", "apartments"]

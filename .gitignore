@@ -1,0 +1,71 @@
+# ==========================================
+# System & IDEs
+# ==========================================
+.DS_Store
+Thumbs.db
+.idea/
+.idea.bak/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ==========================================
+# Python Environments & Cache
+# ==========================================
+venv/
+.venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ==========================================
+# Django Framework Artifacts
+# ==========================================
+*.sqlite3
+db.sqlite3
+media/
+static/
+staticfiles/
+tmp_settings.py
+
+# ==========================================
+# Celery Runtime Files
+# ==========================================
+celerybeat-schedule
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
+celerybeat-schedule.db
+
+
+
+# ==========================================
+# Frontend Specific (Merged from /frontend)
+# ==========================================
+frontend/node_modules/
+frontend/.pnp
+frontend/.pnp.js
+frontend/coverage/
+frontend/build/
+frontend/dist/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+.npm/
+
+
+# ==========================================
+# Security & Secret Environments
+# ==========================================
+.env
+.env.local
+.env.prod
+.env.*.local
