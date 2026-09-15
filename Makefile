@@ -36,3 +36,11 @@ logs:
 clean:
 	rm -rf .pytest_cache .ruff_cache __pycache__
 	rm -f backend/booking_project/celerybeat-schedule*
+
+# Применение миграций Django внутри контейнера бэкенда
+migrate:
+	docker compose exec backend python manage.py migrate
+
+# Создание новых миграций Django внутри контейнера бэкенда
+migrations:
+	docker compose exec backend python manage.py makemigrations
