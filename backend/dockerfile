@@ -1,0 +1,31 @@
+# Используем официальный стабильный и легкий образ Python
+FROM python:3.11-slim
+
+# Настраиваем переменные окружения для Python
+# PYTHONDONTWRITEBYTECODE - запрещает Python писать файлы .pyc на диск
+# PYTHONUNBUFFERED - гарантирует, что логи бэкенда сразу выводятся в терминал без задержек
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    WORKDIR=/app
+
+# Устанавливаем рабочую директорию
+WORKDIR $WORKDIR
+
+# Устанавливаем системные зависимости, необходимые для сборки некоторых Python-пакетов (например, psycopg2)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Копируем и устанавливаем зависимости Python
+# Делаем это ДО копирования кода, чтобы Docker кэшировал этот слой и не пересобирал его при каждом изменении кода
+COPY requirments.txt $WORKDIR/
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirments.txt
+
+# Копируем весь код бэкенда в контейнер
+COPY . $WORKDIR/
+
+# Открываем порт для Daphne
+EXPOSE 8080
