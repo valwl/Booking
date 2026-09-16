@@ -1,0 +1,17 @@
+node_modules/
+
+build/
+
+dist/
+
+
+
+.git/
+
+.gitignore
+
+
+
+.env
+
+.env.*
