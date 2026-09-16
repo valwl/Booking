@@ -7,7 +7,7 @@ export const passwordChange = (formData) => {
 
 export const updateUserSettings = async (payload) => {
   const response = await api.patch(
-    '/user_api/user/update/',
+    '/user_api/user/me/',
 
     payload
   );

@@ -6,8 +6,6 @@ import { login } from '../redux/authActions';
 export const useLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { bookingData } = useSelector((state) => state.booking);
-  console.log(bookingData);
 
   const initialData = {
     username: '',
@@ -29,25 +27,13 @@ export const useLogin = () => {
       );
       console.log('response data', response);
       if (response && response.status === 200) {
-        console.log(bookingData);
-        if (
-          bookingData &&
-          bookingData.checkin_day &&
-          bookingData.checkout_day
-        ) {
-          navigate('/bookingConfirm', {
-            state: { formData: bookingData },
-          });
-        } else {
-          navigate('/home');
-        }
-
+        navigate('/home');
         console.log('welcome inside of the system');
       }
+
     } catch (error) {
       console.error('information about error', error);
     }
-
     setFormData(initialData);
   };
 
