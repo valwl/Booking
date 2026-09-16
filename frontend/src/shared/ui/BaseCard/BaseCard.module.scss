@@ -1,0 +1,134 @@
+.baseCard {
+  background-color: #000;
+  position: relative;
+  width: 400px;
+  height: 600px;
+  perspective: 1000px;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid #d4af37;
+  }
+
+  &.flipped {
+    .cardFront {
+      transform: rotateY(180deg);
+    }
+
+    .cardBackend {
+      transform: rotateY(0deg);
+    }
+  }
+
+  &.unFlipped {
+    .cardFront {
+      transform: rotateY(0deg);
+    }
+
+    .cardBackend {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .cardFront,
+  .cardBackend {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .cardFront {
+    transform: rotateY(0deg);
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+
+    .imageContainer {
+      width: 100%;
+      height: 65%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .baseCardContent {
+      padding: 16px;
+      height: 35%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .baseCardTitle {
+        font-size: 1.5em;
+        margin: 12px 0;
+        color: #b0b0b0;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #ffd500;
+        }
+      }
+
+      .baseCardButton {
+        background-color: #b8860b;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+
+        &:hover {
+          background-color: #ffae00;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  .cardBackend {
+    background-color: #111;
+    color: #fff;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+
+    .cardBackContent {
+      padding: 20px;
+
+      p {
+        font-size: 1em;
+        margin-bottom: 20px;
+      }
+
+      .baseCardButton {
+        background-color: #b8860b;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+
+        &:hover {
+          background-color: #ffae00;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}

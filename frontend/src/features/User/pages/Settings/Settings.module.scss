@@ -1,0 +1,67 @@
+.settingsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 700px;
+  margin: 0 auto;
+
+  padding: 20px;
+  background-color: #d5e3e5;
+}
+
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #bfc3b6;
+    border-radius: 18px;
+    font-size: 16px;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.settingsLink {
+  color: #acddd2;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.settingsLink:hover {
+  text-decoration: underline;
+}
+
+.settingsSubmitButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #abe6ac;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e2afba;
+    transform: translateY(-3px);
+  }
+}
