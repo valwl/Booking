@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from .models.apartments import Apartment, ApartmentImg, PopularApartment, SliderImage
 from .models.locations import LocationImg, Locations
-# from .models.reviews import Review
 
 admin.site.register(Apartment)
 admin.site.register(ApartmentImg)
