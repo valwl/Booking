@@ -18,7 +18,7 @@ status:
 
 # Запуск тестов проекта (автоматически подхватит настройки из pyproject.toml)
 test:
-	docker compose exec -e PYTHONDONTWRITEBYTECODE=1 backend pytest
+	docker compose exec backend pytest -v --ds=booking_project.settings
 
 # Проверка кода линтером Ruff
 lint:
