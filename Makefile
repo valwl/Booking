@@ -18,7 +18,7 @@ status:
 
 # Запуск тестов проекта (автоматически подхватит настройки из pyproject.toml)
 test:
-	docker compose exec backend pytest -v --ds=booking_project.settings
+	docker compose exec backend pytest $(app) -v --ds=booking_project.settings
 
 # Проверка кода линтером Ruff
 lint:
