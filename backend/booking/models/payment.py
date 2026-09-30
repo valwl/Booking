@@ -36,7 +36,7 @@ class Payment(models.Model):
 
     provider = models.CharField(max_length=255, choices=PROVIDER_CHOICES, default=PROVIDER_STRIPE)
     provider_payment_id = models.CharField(max_length=255, null=True, blank=True)
-    provider_reference = models.CharField(max_length=255, null=True, blank=True)
+    provider_reference = models.TextField(null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

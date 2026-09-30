@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models.apartments import Apartment, ApartmentImg, Locations, PopularApartment, SliderImage
 from .models.locations import LocationImg
+from .models.reviews import Review
 
 
 class ApartmentImgSerializer(serializers.ModelSerializer):
