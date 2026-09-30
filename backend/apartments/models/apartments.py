@@ -30,3 +30,6 @@ class SliderImage(models.Model):
 
 class PopularApartment(models.Model):
     apartment = models.OneToOneField(Apartment, on_delete=models.CASCADE)
+
+
+

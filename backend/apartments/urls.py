@@ -3,6 +3,7 @@ from django.urls import path
 from apartments.views.apartment_read import ApartmentDetailView, PopularApartmentList, UserApartmentList
 from apartments.views.apartment_write import ApartmentCreateListView, ApartmentDeleteView, ApartmentUpdateView
 from apartments.views.locations import LocationDetailView, LocationListView
+from apartments.views.review import ReviewCreateView
 from apartments.views.sliders import ImagesForClientSlider
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path("locations/", LocationListView.as_view(), name="locations_list"),
     path("location/<int:pk>/", LocationDetailView.as_view(), name="location_detail"),
     path("slider_image/", ImagesForClientSlider.as_view(), name="image_for_slider"),
+    path("create_review/<int:booking_id>/", ReviewCreateView.as_view(), name="create_review"),
 ]

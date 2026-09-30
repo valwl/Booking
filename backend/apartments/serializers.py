@@ -21,6 +21,18 @@ class ApartmentImgSerializer(serializers.ModelSerializer):
         return None
 
 
+class ReviewSerializer(serializers.ModelSerializer):
+    author = serializers.CharField(source="user.first_name", read_only=True)
+
+    class Meta:
+        model = Review
+        fields = ["id", "apartment", "rating", "text", "author"]
+
+
+class ReviewCreateInputSerializer(serializers.Serializer):
+    rating = serializers.IntegerField(min_value=1, max_value=5)
+    text = serializers.CharField()
+
 class ApartmentDetailSerializer(serializers.ModelSerializer):
     images = ApartmentImgSerializer(many=True, read_only=True)
 
@@ -35,6 +47,7 @@ class ApartmentDetailSerializer(serializers.ModelSerializer):
             "location",
             "user",
             "images",
+            "reviews",
         ]
 
 
