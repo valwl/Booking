@@ -52,6 +52,20 @@ INSTALLED_APPS = [
     'booking'
 ]
 
+ASGI_APPLICATION = "booking_project.asgi.application"
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.getenv("REDIS_URL")],  # Адрес и порт вашего Redis сервера
+        },
+    },
+}
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

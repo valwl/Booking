@@ -5,6 +5,8 @@ services:
     image: postgres:16
     container_name: booking_postgres_showcase
     restart: always
+    env_file:
+      - .env
     environment:
       POSTGRES_DB: booking_db_showcase
       POSTGRES_USER: booking_user_showcase
@@ -18,9 +20,10 @@ services:
     build:
       context: ./backend
     container_name: booking_backend_showcase
-    command: python manage.py runserver 0.0.0.0:8080
+    command: daphne -b 0.0.0.0 -p 8080 booking_project.asgi:application
     volumes:
       - ./backend:/app
+      - media_volume:/app/booking_project/media
     ports:
       - "8081:8080"
     environment:
@@ -29,6 +32,57 @@ services:
       - DEBUG=True
     depends_on:
       - postgres
+      - redis
+    env_file:
+      - .env
+
+  redis:
+    image: redis:7
+    container_name: booking_redis
+    ports:
+      - "6379:6379"
+
+
+  celery:
+    build:
+      context: ./backend
+    container_name: booking_celery
+    command: celery -A booking_project worker -l info
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - postgres
+
+
+  celery_beat:
+    build:
+      context: ./backend
+    container_name: booking_celery_beat
+    command: celery -A booking_project beat -l info
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - postgres
+
+
+  stripe_cli:
+    image: stripe/stripe-cli:latest
+    container_name: booking_stripe_cli
+    command: listen --forward-to backend:8080/booking_api/webhook/stripe/ --api-key ${STRIPE_SECRET_KEY} --device-name local_docker_dev
+    env_file:
+      - .env
+    volumes:
+      - stripe_config:/root/.config/stripe
+    depends_on:
+      - backend
+
+
 
   frontend:
     build:
@@ -41,3 +95,22 @@ services:
 
 volumes:
   postgres_data_showcase:
+  media_volume:
+  stripe_config:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
