@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 import dj_database_url
 from datetime import timedelta
+from celery.schedules import crontab
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,3 +161,49 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+REDIS_URL = os.getenv("REDIS_URL")
+
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
+
+
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
+
+# INSTALLED_APPS += ['django_celery_beat']
+CELERY_BEAT_SCHEDULE = {
+    "complete_finishing_booking_evry_night": {
+        "task": "booking.task.complete_finished_bookings",
+        "schedule": crontab(hour=3, minute=0),
+    }
+}
+
+STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY")
+STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+
+
+BOOKING_PAYMENT_TIMEOUT = 1800
+# PAYMENT_PROVIDER = 'yoomoney'
+PAYMENT_PROVIDER = "stripe"
+
+
+YOOKASSA_SHOP_ID = os.getenv("DHOPE_ID")
+YOOKASSA_SECRET_KEY = os.getenv("YOOMONEY_SECRET_KEY")
+PAYMENT_RETURN_URL = "http://localhost"
