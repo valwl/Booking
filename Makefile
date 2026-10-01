@@ -1,4 +1,4 @@
-.PHONY: up down restart test lint format status logs clean
+.PHONY: up down restart test lint format status logs clean seed
 
 # Запуск всех контейнеров в фоновом режиме
 up:
@@ -44,3 +44,7 @@ migrate:
 # Создание новых миграций Django внутри контейнера бэкенда
 migrations:
 	docker compose exec backend python manage.py makemigrations
+
+# Запуск скрипта наполнения базы данных демонстрационными данными
+seed:
+	docker compose exec backend python manage.py seed_db
